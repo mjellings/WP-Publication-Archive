@@ -734,16 +734,16 @@ class WP_Publication_Archive {
 		 * @var string $author     Author slug to filter.
 		 * @var number $limit      Number of publications per page.
 		 * @var string $showas     Format to use when displaying publications.
-		 * @var string $sort       Which field to sort by, e.g. 'date' or 'name'
-		 * @var string $order      The sort order to use, e.g. 'asc' or 'desc'
 		 */
 		extract( shortcode_atts( array(
-		                              'categories' => '',
-		                              'author'     => '',
-		                              'limit'      => 10,
-		                              'showas'     => 'list', 
-		                              'sort'	   => 'date', 
-		                              'order'	   => 'ASC'
+		                              'categories'    => '',
+		                              'author'        => '',
+		                              'limit'         => 10,
+									  'start'         => 1,
+		                              'showas'        => 'list', 
+									  'sort'	      => 'date', 
+									  'order'	      => 'asc', 
+									  'hidepagination' => false
 		                         ), $atts ) );
 
 		$limit = apply_filters( 'wpa-pubs_per_page', $limit ); // Ugly, deprecated filter.
@@ -756,15 +756,15 @@ class WP_Publication_Archive {
 			$paged  = 1;
 			$offset = 0;
 		}
+		
+		if ($start > 1) { $offset = $offset + ($start - 1); }
 
 		$sort = strtolower($sort);
 		$order = strtolower($order);
-		
-		// Defalt sort field and sort order
+
 		$sort_field = 'post_date';
 		$sort_order = 'DESC';
 		
-		// Check if alternative sort field and/or order have been provided
 		if ($sort == 'title') { $sort_field = 'post_title'; }
 		if ($order == 'asc') { $sort_order = 'ASC'; }
 		
