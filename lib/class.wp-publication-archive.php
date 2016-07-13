@@ -739,11 +739,11 @@ class WP_Publication_Archive {
 		                              'categories'    => '',
 		                              'author'        => '',
 		                              'limit'         => 10,
-									  'start'         => 1,
+		                              'start'         => 1,
 		                              'showas'        => 'list', 
-									  'sort'	      => 'date', 
-									  'order'	      => 'asc', 
-									  'hidepagination' => false
+		                              'sort'	      => 'date', 
+		                              'order'	      => 'asc', 
+		                              'hidepagination' => false
 		                         ), $atts ) );
 
 		$limit = apply_filters( 'wpa-pubs_per_page', $limit ); // Ugly, deprecated filter.
